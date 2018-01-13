@@ -1,0 +1,18 @@
+<h2>Your caches</h2>
+
+<%= for cache <- @caches do %>
+    <div class="cache">
+        <div class="title">
+            <div class="code">
+                <%= link cache.code, to: cache_path(@conn, :show, cache) %>
+            </div>
+            <div class="name">
+                <%= cache.name %>
+            </div>
+        </div>
+        <div class="description">
+            <%= cache.description %>
+        </div>
+
+    </div>
+<% end %>

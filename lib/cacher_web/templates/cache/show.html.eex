@@ -1,0 +1,10 @@
+<div class="jumbotron">
+    <h2><%= @cache.code %> <%= @cache.name %></h2>
+    <p>
+        <%= @cache.description %>
+    </p>
+    <span>
+      <%= link "Edit", to: cache_path(@conn, :edit, @cache), class: "btn btn-default" %>
+      <%= link "Delete", to: cache_path(@conn, :delete, @cache), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
+    </span>
+</div>
