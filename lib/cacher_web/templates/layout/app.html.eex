@@ -28,6 +28,7 @@
                             </li>
                         <% else %>
                             <li class="pull-right"><%= link("Log in", to: session_path(@conn, :login)) %></li>
+                            <li class="pull-right"><%= link "Create new account", to: registration_path(@conn, :registration) %></li>
                         <% end %>
                     </ul>
                 </nav>
