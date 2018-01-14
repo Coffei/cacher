@@ -1,18 +1,43 @@
-<h2>Your caches</h2>
+<div class="pull-right">
+    <a class="btn btn-default" href="<%= cache_path(@conn, :new) %>">Add Cache</a>
+</div>
+<h2>Find a cache</h2>
 
-<%= for cache <- @caches do %>
-    <div class="cache">
-        <div class="title">
-            <div class="code">
-                <%= link cache.code, to: cache_path(@conn, :show, cache) %>
-            </div>
-            <div class="name">
-                <%= cache.name %>
-            </div>
-        </div>
-        <div class="description">
-            <%= cache.description %>
-        </div>
-
+<%= form_for @conn, cache_path(@conn, :search), [as: "search", method: :get, class: "form-inline"], fn f-> %>
+    <div class="form-group">
+        <%= label f, :query, "Query", class: "control-label" %>
+        <%= search_input f, :query, class: "form-control", placeholder: "enter search query" %>
     </div>
+    <div class="form-group">
+        <%= submit "Search", class: "btn btn-primary" %>
+    </div>
+<% end %>
+
+<%= if @caches do %>
+    <hr/>
+    <%= case @caches do %>
+        <% [] ->  %>
+            <span>No caches found.</span>
+        <% caches -> %>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </thead>
+                <tbody>
+                    <%= for c <- caches do %>
+                        <tr>
+                            <td><%= c.code %></td>
+                            <td><%= c.name %></td>
+                            <td></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+    <% end %>
 <% end %>

@@ -5,7 +5,7 @@ defmodule Cacher.Repo.Migrations.CreateCaches do
     create table(:caches) do
       add :code, :string
       add :name, :string
-      add :description, :string
+      add :type, :string
       add :lat, :integer
       add :lon, :integer
 

@@ -1,45 +1,5 @@
 /* This file is for your main application css. */
 
-/* Cache styles */
-.cache {
-    border-color: #aaaaaa;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 5px;
-    padding-bottom: 10px;
-}
-
-.cache .title {
-    display: flex;
-    font-size: 15px;
-}
-
-.cache .title .code {
-    font-weight: bold;
-}
-
-.cache .title .code a{
-    color: black;
-}
-
-.cache .title .name {
-    margin-left: 10px;
-    color: #444444;
-}
-
-.cache .description {
-    margin-top 5px;
-    margin-bottom: 5px;
-    color: #333333;
-    font-size: 13px;
-    max-height: 54px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 /* General stuff */
 .jumbotron {
     text-align: initial !important;

@@ -8,8 +8,12 @@ defmodule Cacher.Caches do
 
   alias Cacher.Caches.Cache
 
-  def list_all() do
-    Repo.all(Cache)
+  def search(string) do
+    like_string = "%#{string}%"
+    query = from c in Cache,
+              where: ilike(c.name, ^like_string) or ilike(c.code, ^like_string)
+
+    Repo.all(query)
   end
 
   def get!(id) do

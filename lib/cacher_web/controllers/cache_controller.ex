@@ -5,8 +5,19 @@ defmodule CacherWeb.CacheController do
   alias Cacher.Caches.Cache
 
   def index(conn, _params) do
-    caches = Caches.list_all()
-    render(conn, "index.html", caches: caches)
+    render(conn, "index.html", caches: nil)
+  end
+
+  def search(conn, %{"search" => %{"query" => query}}) do
+    case String.trim(query) do
+      "" ->
+        conn
+        |> put_flash(:warning, "Cannot use empty query.")
+        |> render("index.html", caches: nil)
+      query ->
+        caches = Caches.search(query)
+        render(conn, "index.html", caches: caches)
+    end
   end
 
   def show(conn, %{"id" => id}) do
@@ -17,5 +28,17 @@ defmodule CacherWeb.CacheController do
   def new(conn, _params) do
     changeset = Caches.change(%Cache{})
     render(conn, "new.html", changeset: changeset)
+  end
+
+  def create(conn, %{"cache" => params}) do
+    case Caches.create(params) do
+      {:ok, cache} ->
+        conn
+        |> put_flash(:info, "Cache #{cache.code}: #{cache.name} created.")
+        |> redirect(to: "/") # replace to the cache details
+      {:error, changeset} ->
+        conn
+        |> render("new.html", changeset: changeset)
+    end
   end
 end

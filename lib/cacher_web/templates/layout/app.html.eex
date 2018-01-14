@@ -13,12 +13,17 @@
 
     <body>
         <div class="container">
-            <header class="header">
-                <nav role="navigation">
-                    <ul class="nav nav-pills">
-                        <li><a href="<%= cache_path(@conn, :index) %>">Caches</a></li>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="<%= landing_path(@conn, :index) %>">Cacher</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><%= link "Caches", to: cache_path(@conn, :index) %></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
                         <%= if logged_in?(@conn) do %>
-                            <li class="dropdown pull-right">
+                            <li class="dropdown">
                                 <a href="#" class="dropdown_toggle" data-toggle="dropdown" role="button">
                                     <%= logged_in_user(@conn).name %>&nbsp;<span class="caret"></span>
                                 </a>
@@ -27,14 +32,15 @@
                                 </ul>
                             </li>
                         <% else %>
-                            <li class="pull-right"><%= link("Log in", to: session_path(@conn, :login)) %></li>
-                            <li class="pull-right"><%= link "Create new account", to: registration_path(@conn, :registration) %></li>
+                            <li><%= link "Create new account", to: registration_path(@conn, :registration) %></li>
+                            <li><%= link("Log in", to: session_path(@conn, :login)) %></li>
                         <% end %>
                     </ul>
-                </nav>
-            </header>
+                </div>
+            </nav>
 
             <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+            <p class="alert alert-warning" role="alert"><%= get_flash(@conn, :warning) %></p>
             <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
             <main role="main">

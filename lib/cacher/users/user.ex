@@ -2,12 +2,14 @@ defmodule Cacher.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Cacher.Users.User
+  alias Cacher.Cachenotes.Cachenote
 
   schema "users" do
     field :name, :string
     field :username, :string
     field :crypted_password, :string
     field :password, :string, virtual: true
+    has_many :cachenotes, Cachenote
 
     timestamps()
   end

@@ -16,10 +16,10 @@ defmodule CacherWeb.Router do
   scope "/", CacherWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-    get "/test", TestPageController, :index
+    get "/", LandingController, :index
 
-    resources "/caches", CacheController
+    get "/caches/search", CacheController, :search
+    resources "/caches", CacheController, only: [:index, :show, :new, :create]
 
     # user registration and login
     get "/registration", UserController, :registration, as: :registration

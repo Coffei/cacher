@@ -37,4 +37,11 @@ defmodule CacherWeb.ErrorHelpers do
       Gettext.dgettext(CacherWeb.Gettext, "errors", msg, opts)
     end
   end
+
+  def form_group_error(form, field) do
+    cond do
+      form.errors[field] -> "has-error"
+      true -> ""
+    end
+  end
 end
