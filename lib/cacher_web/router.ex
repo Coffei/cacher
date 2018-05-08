@@ -27,7 +27,7 @@ defmodule CacherWeb.Router do
     get "/login", SessionController, :index
     post "/login", SessionController, :login
     delete "/logout", SessionController, :logout
-    
+
   end
 
   # Other scopes may use custom stacks.

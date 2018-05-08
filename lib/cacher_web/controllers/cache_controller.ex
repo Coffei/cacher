@@ -5,29 +5,35 @@ defmodule CacherWeb.CacheController do
   alias Cacher.Caches.Cache
 
   def index(conn, _params) do
-    render(conn, "index.html", caches: nil)
+    current_user = get_session(conn, :current_user)
+    render(conn, "index.html", caches: nil, current_user: current_user)
   end
 
   def search(conn, %{"search" => %{"query" => query}}) do
+    current_user = get_session(conn, :current_user)
     case String.trim(query) do
       "" ->
         conn
         |> put_flash(:warning, "Cannot use empty query.")
-        |> render("index.html", caches: nil)
+        |> render("index.html", caches: nil, current_user: current_user)
       query ->
         caches = Caches.search(query)
-        render(conn, "index.html", caches: caches)
+        render(conn, "index.html", caches: caches, current_user: current_user)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    cache = Caches.get!(id)
+    cache = Caches.get_by_code!(id)
     render(conn, "show.html", cache: cache)
   end
 
   def new(conn, _params) do
-    changeset = Caches.change(%Cache{})
-    render(conn, "new.html", changeset: changeset)
+    if get_session(conn, :current_user) do
+      changeset = Caches.change(%Cache{})
+      render(conn, "new.html", changeset: changeset)
+    else
+      redirect(conn, to: cache_path(conn, :index))
+    end
   end
 
   def create(conn, %{"cache" => params}) do

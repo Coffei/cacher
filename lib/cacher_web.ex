@@ -39,6 +39,7 @@ defmodule CacherWeb do
 
       import CacherWeb.Router.Helpers
       import CacherWeb.ErrorHelpers
+      import CacherWeb.ViewHelpers
       import CacherWeb.Gettext
     end
   end

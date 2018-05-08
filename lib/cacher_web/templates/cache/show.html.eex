@@ -1,10 +1,17 @@
 <div class="jumbotron">
-    <h2><%= @cache.code %> <%= @cache.name %></h2>
-    <p>
-        <%= @cache.description %>
-    </p>
-    <span>
-      <%= link "Edit", to: cache_path(@conn, :edit, @cache), class: "btn btn-default" %>
-      <%= link "Delete", to: cache_path(@conn, :delete, @cache), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %>
-    </span>
+    <h2>
+        <%= @cache.code %> <%= @cache.name %>
+        <small><%= type(@cache) %></small>
+    </h2>
+    <%= if @cache.lat && @cache.lon do %>
+        <p>
+            <%= coordinate(@cache.lat, :lat, :dec_min) %>
+            <br/>
+            <%= coordinate(@cache.lon, :lon, :dec_min) %>
+        </p>
+    <% else %>
+        <p class="text-muted">
+            coordinates not specified
+        </p>
+    <% end %>
 </div>

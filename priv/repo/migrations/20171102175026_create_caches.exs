@@ -6,8 +6,8 @@ defmodule Cacher.Repo.Migrations.CreateCaches do
       add :code, :string
       add :name, :string
       add :type, :string
-      add :lat, :integer
-      add :lon, :integer
+      add :lat, :float
+      add :lon, :float
 
       timestamps()
     end

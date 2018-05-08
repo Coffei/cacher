@@ -1,6 +1,8 @@
-<div class="pull-right">
-    <a class="btn btn-default" href="<%= cache_path(@conn, :new) %>">Add Cache</a>
-</div>
+<%= if @current_user do %>
+    <div class="pull-right">
+        <a class="btn btn-default" href="<%= cache_path(@conn, :new) %>">Add Cache</a>
+    </div>
+<% end %>
 <h2>Find a cache</h2>
 
 <%= form_for @conn, cache_path(@conn, :search), [as: "search", method: :get, class: "form-inline"], fn f-> %>
@@ -32,7 +34,9 @@
                 <tbody>
                     <%= for c <- caches do %>
                         <tr>
-                            <td><%= c.code %></td>
+                            <td>
+                                <%= link(c.code, to: cache_path(@conn, :show, c.code)) %>
+                            </td>
                             <td><%= c.name %></td>
                             <td></td>
                         </tr>

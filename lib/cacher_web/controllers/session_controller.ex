@@ -15,7 +15,7 @@ defmodule CacherWeb.SessionController do
         |> redirect(to: "/")
       {:error, _} ->
         conn
-        |> put_flash(:error, "Incorrect credentials. Please try again.params")
+        |> put_flash(:error, "Incorrect credentials. Please try again.")
         |> render("login.html")
     end
   end

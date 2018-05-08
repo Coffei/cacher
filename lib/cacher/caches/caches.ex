@@ -20,6 +20,13 @@ defmodule Cacher.Caches do
     Repo.get!(Cache, id)
   end
 
+  def get_by_code!(code) do
+    query = from c in Cache,
+      where: c.code == ^code
+
+    Repo.one!(query)
+  end
+
   def create(attrs \\ %{}) do
     %Cache{}
     |> Cache.changeset(attrs)
