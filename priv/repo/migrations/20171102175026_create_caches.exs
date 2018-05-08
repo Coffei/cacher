@@ -12,5 +12,6 @@ defmodule Cacher.Repo.Migrations.CreateCaches do
       timestamps()
     end
 
+    create unique_index(:caches, [:code])
   end
 end

@@ -24,6 +24,7 @@ defmodule Cacher.Caches.Cache do
     |> validate_length(:code, is: 6)
     |> validate_length(:name, min: 2)
     |> validate_inclusion(:type, Map.keys(cache_types()))
+    |> unique_constraint(:code)
   end
 
   def cache_types do

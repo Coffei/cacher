@@ -8,7 +8,12 @@ defmodule CacherWeb.LayoutView do
   end
 
   def logged_in?(conn) do
-    Plug.Conn.get_session(conn, :current_user) != nil
+    id = Plug.Conn.get_session(conn, :current_user)
+    if id do
+      Repo.get(User, id) != nil
+    else
+      false
+    end
   end
 
   def logged_in_user(conn) do
